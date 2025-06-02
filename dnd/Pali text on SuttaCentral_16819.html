@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pali text on SuttaCentral</title>
+</head>
+<body>
+  <h1>Pali text on SuttaCentral</h1>
+  <p><em>2020-07-27T00:08:32.163Z</em></p>
+  <p><strong>Original:</strong> <a href="https://discourse.suttacentral.net/t/pali-text-on-suttacentral/16819">https://discourse.suttacentral.net/t/pali-text-on-suttacentral/16819</a></p>
+  <p>
+ We have recently made a substantial set of transformations for the Pali text on SuttaCentral. This post is intended as a summary and history of the text for scholars and those who wish to use our Pali text. These issues have been discussed in various places, and here I am simply bringing them together for convenience.
+</p>
+<p>
+ <strong>
+  Summary: use the Pali text from
+  <a href="https://github.com/suttacentral/bilara-data">
+   bilara-data
+  </a>
+  for all applications.
+ </strong>
+</p>
+<h2>
+ <a class="anchor" href="#background-1" name="background-1">
+ </a>
+ Background
+</h2>
+<p>
+ In the modern era, Pali texts have been edited and published as book editions. One of the most ambitious and influential such projects was the 6th Council (
+ <em>
+  Chaṭṭha Saṅgāyana
+ </em>
+ or
+ <em>
+  Chaṭṭha Saṅgīti
+ </em>
+ ), held in Myanmar in 1954–1956, with participation of international bhikkhus. Several printed editions of this text followed. During the 1990s the official Burmese edition was digitized by the Vipassana Research Institute and
+ <a href="https://www.tipitaka.org/chattha.shtml">
+  published as CD-ROM and website
+ </a>
+ .
+</p>
+<p>
+ The VRI digital edition was passed to a group called the
+ <a href="https://en.wikipedia.org/wiki/Dhamma_Society_Fund">
+  Dhamma Society Fund
+ </a>
+ in Bangkok. Between 1999 and 2004 they created the Mahāsaṅgīti edition based on the VRI. It is also called the “World Tipiṭaka Edition”, but the full name is “Mahāsaṅgīti Tipiṭaka Buddhavasse 2500”, or in English, “The B.E. 2500 Great International Council Pāḷi Tipiṭaka”.
+</p>
+<p>
+ I met with and discussed the project several times with the Dhamma Society team in the early 00s, and had the chance to visit their headquarters in Bangkok. They informed me that their text had been proofread three times orally, recited from beginning to end with auditors checking as they went, and three times visually. This was done using the first Burmese printed edition of the Chaṭṭha Saṅgīti as the primary source. It was checked against about a dozen other printed editions (many, but not all, of which were alternate versions of the Chaṭṭha Saṅgīti.) They did not, however, use Sanskrit, Tibetan, or Chinese sources at all, and did not go back to manuscripts.
+</p>
+<p>
+ The scholarship team was led by a mae chi, whose name I have sadly not been able to discover, with background in Pali and Sanskrit at Nalanda University. The stated editorial policy of the Dhamma Society was simply to rely on the opinions of experts in determining the best reading. The Dhamma Society itself did not aim to establish a new edition, but to faithfully represent the Chaṭṭha Saṅgīti text.
+</p>
+<p>
+ <a href="https://discourse.suttacentral.net/t/what-is-the-difference-between-the-pali-text-of-the-vri-and-that-of-the-mahasa-giti/2667">
+  Comparison of the Mahasangiti with the source VRI text
+ </a>
+ shows that the textual changes are well-considered, and attests to the Dhamma Society’s careful editorial work.
+</p>
+<p>
+ Unfortunately, in late 2012 the Dhamma Society dissolved and their online resources disappeared. SuttaCentral obtained a copy of their source text from Venerable Yuttadhammo, who has made it available in his Digital Pali Reader. These source files, with only light transformations, are maintained by SuttaCentral in
+ <a href="https://github.com/suttacentral/pali/tree/master/mahasangiti">
+  this repository
+ </a>
+ .
+</p>
+<h2>
+ <a class="anchor" href="#adapting-the-mahasangiti-to-html-for-suttacentral-2" name="adapting-the-mahasangiti-to-html-for-suttacentral-2">
+ </a>
+ Adapting the Mahasangiti to HTML for SuttaCentral
+</h2>
+<p>
+ The work of adapting the Pali texts for SuttaCentral was initially by Blake Walshe, continued by Ayya Vimala and Bhante Sujato, assisted by several volunteers.
+</p>
+<p>
+ The initial task was to transform the XML files into HTML. We made a number of basic decisions at that time.
+</p>
+<ul>
+ <li>
+  Usually one sutta per file, (whereas the Mahasangiti split long suttas into many sections.)
+ </li>
+ <li>
+  Sometimes very short suttas were combined (eg. in the Anguttara Ones and Twos, and Dhammapada).
+ </li>
+ <li>
+  Use modern, semantic HTML throughout, for example, for headings.
+ </li>
+ <li>
+  The Mahasangiti sources kept the variant readings and cross-reference notes separate to the text files. There is an extensive set of files that link the two, but the system is extremely obscure and difficult to work with. Nevertheless, we succeeded in importing these notes into the HTML text files.
+ </li>
+ <li>
+  Use our own set of abbreviations and nomenclature. This is primarily required by the fact that we must deal with the parallels, and hence have a much wider corpus.
+ </li>
+</ul>
+<p>
+ This created the set of HTML files that we used on SuttaCentral. These files are maintained
+ <a href="https://github.com/suttacentral/legacy-suttacentral-data/tree/master/text/pi">
+  in this repository
+ </a>
+ .
+</p>
+<h2>
+ <a class="anchor" href="#from-html-to-json-for-bilara-translation-3" name="from-html-to-json-for-bilara-translation-3">
+ </a>
+ From HTML to JSON for Bilara translation
+</h2>
+<p>
+ While the HTML texts have served us well, they have a number of severe limitations. These are not details of implementation, but fundamental problems with the very idea of markup. These problems became exposed as we developed our own set of translations. We accordingly developed an entirely new system for maintaining the texts in the data exchange format JSON. This forms the basis for all our Pali texts going forward, and we aim to extend it to other languages as well.
+</p>
+<p>
+ To understand the reasoning here, it is necessary to appreciate the limitations of markup in dealing with text, especially complex text such as ours. The basic problem is simple: text with markup mixes up different things in the same file, and makes it hard or impossible to separate them when needed. These things might include:
+</p>
+<ul>
+ <li>
+  Application logic (such as navigation)
+ </li>
+ <li>
+  Styles (fonts, colors, etc.)
+ </li>
+ <li>
+  Structure (eg. paragraphs, headings)
+ </li>
+ <li>
+  Metadata (eg. copyright, authorship)
+ </li>
+ <li>
+  Supplementary data (eg. variant readings)
+ </li>
+ <li>
+  Notes
+ </li>
+ <li>
+  References
+ </li>
+</ul>
+<p>
+ Maintaining all of these in a consistent way across tens of thousands of texts is not impossible, but it is not easy. We have tried to keep things as clean as possible, for example by removing as many things as possible from the HTML files (including application logic and styles). But what remains is still unwieldy.
+</p>
+<p>
+ And there are certain things that are practically impossible with markup. This is particularly the case when it comes to translations. Much of the information that we have is equally application to each translation. For example, regardless of whether one is reading a translation in English, Spanish, or Japanese, you may want to check the underlying Pali text for this paragraph. You may also want to see if there are variant readings, or check where this passage appears in a particular printed edition. In markup files, all this information is siloed per file, and cannot be easily shared.
+</p>
+<p>
+ When undertaking our new translations of the Pali canon, we transformed our Pali files into the
+ <a href="https://en.wikipedia.org/wiki/Gettext">
+  gettext PO format
+ </a>
+ . We initially had no interest other than making it work for translation. The more we worked with this format, however, the more we realized the possibilities. However, PO itself is not well-specified for our requirements, so we developed our own specification based on JSON, the universal data-exchange format for the web.
+</p>
+<p>
+ This system is simple but flexible and powerful. The texts are maintained in the
+ <a href="https://github.com/suttacentral/bilara-data">
+  bilara-data
+ </a>
+ repository.
+</p>
+<ul>
+ <li>
+  Each text is divided into
+  <em>
+   segments
+  </em>
+  , where a segment is a minimum meaningful string of text (such as a sentence, a clause, a line of verse, or a doctrinal pericope.)
+ </li>
+ <li>
+  Each segment is assigned an ID that is unique within the corpus.
+ </li>
+ <li>
+  Each kind of content is maintained in separate files in separate folders.
+ </li>
+ <li>
+  Applications use the segment ID to combine content as appropriate.
+ </li>
+</ul>
+<p>
+ Let us see a simple example. MN 1 Mulapariyaya Sutta begins with the stock phrase, represented in bilara-data thus:
+</p>
+<pre><code class="lang-auto">"mn1:1.1": "Evaṁ me sutaṁ—",
+</code></pre>
+<p>
+ Like every entry in bilara-data, this has two parts, the segment ID and the content.
+</p>
+<p>
+ The segment ID has two parts. The portion before the colon is the ID for the text, which is also the name of the current file. The portion after the colon is the number of the segment within this text. Thus
+ <code>
+  mn1:1.1
+ </code>
+ means “Majjhima Nikaya discourse number one, segment 1.1”.
+</p>
+<p>
+ The content is the string of Pali text for this segment.
+</p>
+<p>
+ The various folders contain different content for the same string, as indicated by the folder names. There is no limit to how many folders or types of information are assigned. And because each form of data is kept strictly separate, applications can simply consume whatever content they require and ignore the rest.
+</p>
+<p>
+ Let us see what it contains.
+</p>
+<p>
+ In /reference we find:
+</p>
+<pre><code class="lang-auto">"mn1:1.1": "bj10.2, cck12.1, csp1ed9.1, csp2ed9.1, dr12.1, ms9M_2, msdiv1, ndp9.3, nya1, pts-vp-pli1.1, sc1, sya12.1, vri12.1",
+</code></pre>
+<p>
+ Thus this particular segment may be checked against the Pali text in this whole list of editions.
+</p>
+<p>
+ In /html we find:
+</p>
+<pre><code class="lang-auto"> "mn1:1.1": "&lt;p&gt;&lt;span class='evam'&gt;{}&lt;/span&gt;",
+</code></pre>
+<p>
+ The
+ <code>
+  {}
+ </code>
+ acts as placeholder for the text. Here, the string is the start of a paragraph, and in addition, is wrapped in a span for styling (represented as small-caps on SuttaCentral).
+</p>
+<p>
+ In /translation/sujato we find:
+</p>
+<pre><code class="lang-auto">"mn1:1.1": "So I have heard. ",
+</code></pre>
+<p>
+ Any number of other translations can be added, and mixed and matched as desired. On SuttaCentral, we might present the above data in HTML as follows:
+</p>
+<pre><code class="lang-auto">&lt;p&gt;
+    &lt;span class='evam'&gt;
+        &lt;span class='segment' id='mn1:1.1' data-reference='bj10.2, cck12.1, csp1ed9.1, csp2ed9.1, dr12.1, ms9M_2, msdiv1, ndp9.3, nya1, pts-vp-pli1.1, sc1, sya12.1, vri12.1'&gt;
+            &lt;span class='root' lang='pli' translate='no'&gt;Evaṁ me sutaṁ—&lt;/span&gt;
+            &lt;span class='translation' lang='en'&gt;So I have heard. &lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/span&gt;
+</code></pre>
+<blockquote>
+ <p>
+  <em>
+   Note that as of writing, these changes have not yet made their way to the actual SuttaCentral site.
+  </em>
+ </p>
+</blockquote>
+<h2>
+ <a class="anchor" href="#text-integrity-checking-4" name="text-integrity-checking-4">
+ </a>
+ Text integrity checking
+</h2>
+<p>
+ In transforming the text through multiple formats, various errors and issues arose. We undertook a major project to test our text against the original source files and rectify any errors. Fortunately the errors discovered were minor, and we have fixed all outstanding issues. This project is discussed in more detail here.
+</p>
+<aside class="quote quote-modified" data-post="1" data-topic="16438">
+ <div class="title">
+  <div class="quote-controls">
+  </div>
+  <img alt="" class="avatar" height="24" loading="lazy" src="media/Pali text on SuttaCentral_01.png" width="24"/>
+  <a href="https://discourse.suttacentral.net/t/pali-text-integrity-checking/16438">
+   Pali text integrity checking
+  </a>
+  <a class="badge-category__wrapper" href="/c/meta/27">
+   <span class="badge-category" data-category-id="27" data-drop-close="true" style="--category-badge-color: #cf8300; --category-badge-text-color: #bf1e2e;" title="Discussion about SuttaCentral and this forum, its organization, how it works, and how we can improve it.">
+    <span class="badge-category__name">
+     Meta
+    </span>
+   </span>
+  </a>
+ </div>
+ <blockquote>
+  Today I have the very pleasant task of announcing the completion of our process of text integrity checking for our Pali texts. 
+We have run a thorough set of tests comparing our Pali text with the original source files, and fixed the differences between them. The corrected texts are available on bilara-data and will be pushed to our site in due course. 
+Background
+On the dissolution of the Mahasangiti project, SuttaCentral inherited from Ven Yuttadhammo’s Digital Pali Reader project a complete s…
+ </blockquote>
+</aside>
+<p>
+ This project is complete so far as the Pali text is concerned, and we are confident that our Pali text is letter-by-letter an accurate representation of the Mahasangiti edition. Of course it is still possible we have made mistakes, so if anyone notices any, please let us know.
+</p>
+<p>
+ Note that, in addition to the structural changes noted above, the following things are different in SuttaCentral’s texts:
+</p>
+<ul>
+ <li>
+  Headings are handled differently.
+ </li>
+ <li>
+  Punctuation is sometimes corrected.
+ </li>
+ <li>
+  Class nasals are used consistently (i.e. we always have
+  <em>
+   ṅg
+  </em>
+  not
+  <em>
+   ṁg
+  </em>
+  , etc.). This is to make search easier.
+ </li>
+</ul>
+<h2>
+ <a class="anchor" href="#future-changes-to-pali-texts-5" name="future-changes-to-pali-texts-5">
+ </a>
+ Future changes to Pali texts
+</h2>
+<p>
+ We do not anticipate any further chanages to the text content of the Mahasangiti text. However there will be some minor ongoing improvements in different areas:
+</p>
+<ul>
+ <li>
+  Certain variant readings and references are still to be added. You can see the progress of these tasks
+  <a href="https://github.com/suttacentral/bilara-data/issues">
+   on Github
+  </a>
+  .
+ </li>
+ <li>
+  Certain segments may be split or combined for consistency and semantic correctness. This may affect a small number of segment numbers in restricted portions of text. These corrections are made piecemeal as we work with the texts, so we cannot predict the number, but it will be only a few cases.
+ </li>
+ <li>
+  In a few cases we use Pali texts outside the Mahasangiti edition. Currently we publish the two patimokkhas, which are derived from the VRI text. We are also working on digitizing manuscripts.
+ </li>
+</ul>
+<h2>
+ <a class="anchor" href="#making-use-of-suttacentral-pali-texts-6" name="making-use-of-suttacentral-pali-texts-6">
+ </a>
+ Making use of SuttaCentral Pali texts
+</h2>
+<p>
+ We encourage you to make use of our texts for your projects. The primary source for our Pali (and other segmented texts) is in the
+ <code>
+  published
+ </code>
+ branch of the
+ <a href="https://github.com/suttacentral/bilara-data">
+  bilara-data
+ </a>
+ repo.
+</p>
+<p>
+ We would recommend that you clone or fork this repo. Check back every six months or so to see if there are any changes.
+</p>
+<p>
+ In the
+ <code>
+  .scripts
+ </code>
+ folder of this repo we provide a
+ <a href="https://discourse.suttacentral.net/t/bilara-i-o/13874">
+  tool called bilara i/o
+ </a>
+ . This uses pyexcel to provide a handy interface for combining the content of bilara-data files and exporting in a convenient format, typically a spreadsheet. From there you can organize the data as you like, and export it in any form you wish.
+</p>
+</body>
+</html>

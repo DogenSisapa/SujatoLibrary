@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Story-tellers & Engineers: a love story</title>
+</head>
+<body>
+  <h1>Story-tellers & Engineers: a love story</h1>
+  <p><em>2020-10-24T11:07:09.993Z</em></p>
+  <p><strong>Original:</strong> <a href="https://discourse.suttacentral.net/t/story-tellers-engineers-a-love-story/17681">https://discourse.suttacentral.net/t/story-tellers-engineers-a-love-story/17681</a></p>
+  <p>
+ I think that the way we look at and understand Suttas tends to over-emphasize engineers at the expense of story-tellers. What do I mean by this? Let me give an example from the only field in which I have experience on both sides, web development.
+</p>
+<p>
+ In web development, the programmer is the engineer, and the UX designer is the storyteller. Both of them are needed for a successful app. And the reason for this is simple.
+ <em>
+  Both look at things from different, complementary, perspectives.
+ </em>
+</p>
+<p>
+ Let’s consider how this might play out with a very simple element. Compare this:
+</p>
+<p>
+ <div class="lightbox-wrapper">
+  <a class="lightbox" data-download-href="/uploads/short-url/eRWfWp1GBNgp8xlbYb5TCF5fUK7.jpeg?dl=1" href="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/original/3X/6/8/68375b32b2c0807cecade9cf28fc8197f78e3cc3.jpeg" title="first">
+   <img alt="first" data-base62-sha1="eRWfWp1GBNgp8xlbYb5TCF5fUK7" data-small-upload="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/6/8/68375b32b2c0807cecade9cf28fc8197f78e3cc3_2_10x10.png" height="183" src="media/Story-tellers _ Engineers_ a love story_01.jpeg" width="690"/>
+   <div class="meta">
+    <svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon">
+     <use xlink:href="#far-image">
+     </use>
+    </svg>
+    <span class="filename">
+     first
+    </span>
+    <span class="informations">
+     1538×408 22.1 KB
+    </span>
+    <svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon">
+     <use xlink:href="#discourse-expand">
+     </use>
+    </svg>
+   </div>
+  </a>
+ </div>
+</p>
+<p>
+ With this:
+</p>
+<p>
+ <div class="lightbox-wrapper">
+  <a class="lightbox" data-download-href="/uploads/short-url/u4dgEO51DqmUMBcOvRnO32bcUFx.jpeg?dl=1" href="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/original/3X/d/2/d2bb2a538ec1aa0a94cf7ccee2fd7c33b1c377bf.jpeg" title="second">
+   <img alt="second" data-base62-sha1="u4dgEO51DqmUMBcOvRnO32bcUFx" data-small-upload="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/d/2/d2bb2a538ec1aa0a94cf7ccee2fd7c33b1c377bf_2_10x10.png" height="184" src="media/Story-tellers _ Engineers_ a love story_02.jpeg" srcset="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/d/2/d2bb2a538ec1aa0a94cf7ccee2fd7c33b1c377bf_2_690x184.jpeg, https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/d/2/d2bb2a538ec1aa0a94cf7ccee2fd7c33b1c377bf_2_1035x276.jpeg 1.5x, https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/d/2/d2bb2a538ec1aa0a94cf7ccee2fd7c33b1c377bf_2_1380x368.jpeg 2x" width="690"/>
+   <div class="meta">
+    <svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon">
+     <use xlink:href="#far-image">
+     </use>
+    </svg>
+    <span class="filename">
+     second
+    </span>
+    <span class="informations">
+     1534×411 23.9 KB
+    </span>
+    <svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon">
+     <use xlink:href="#discourse-expand">
+     </use>
+    </svg>
+   </div>
+  </a>
+ </div>
+</p>
+<p>
+ They look pretty much the same, right? It’s a trap: they are the same. Or on the surface they are. But the code used to produce them is different. Here’s the code for the first one:
+</p>
+<pre><code class="lang-auto">&lt;div style="padding: 1em; outline: 2px solid #ccc"&gt;
+&lt;p&gt;Are macadamias the best nut?&lt;/p&gt;
+&lt;button style="background-color: green; outline: green; color: white; font-weight: bold; padding: 1em 2em; margin-right: 1em"&gt;Yes!&lt;/button&gt;
+&lt;button style="background-color: white; outline: 2px solid red;color: #ccc; font-weight: normal; padding: 1em 2em"&gt;No&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>
+ And the code for the second:
+</p>
+<pre><code class="lang-auto">&lt;style&gt;
+div{ padding: 1em; outline: 2px solid #ccc}
+button:nth-of-type(1) {background-color: green; outline: green; color: white; font-weight: bold; padding: 1em 2em; margin-right: 1em}
+button:nth-of-type(2){background-color: white; outline: 2px solid red;color: #ccc; font-weight: normal; padding: 1em 2em}
+&lt;/style&gt;
+&lt;div&gt;
+&lt;p&gt;Are macadamias the best nut?&lt;/p&gt;
+&lt;button&gt;Yes!&lt;/button&gt;
+&lt;button&gt;No&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>
+ The first example uses inline styles, the second uses global styles. To a designer they are the same; but to an engineer they are quite different. An engineer would use totally different methods to handle one approach rather than the other, even if the results look the same.
+</p>
+<p>
+ Now compare the original design:
+</p>
+<p>
+ <div class="lightbox-wrapper">
+  <a class="lightbox" data-download-href="/uploads/short-url/rLLo77szBM4MFfbuZZkH0lDj4Ig.jpeg?dl=1" href="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/original/3X/c/2/c2a0ea587ed96f546ea8edf851de07d76fdef380.jpeg" title="third">
+   <img alt="third" data-base62-sha1="rLLo77szBM4MFfbuZZkH0lDj4Ig" data-small-upload="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/c/2/c2a0ea587ed96f546ea8edf851de07d76fdef380_2_10x10.png" height="183" src="media/Story-tellers _ Engineers_ a love story_03.jpeg" srcset="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/c/2/c2a0ea587ed96f546ea8edf851de07d76fdef380_2_690x183.jpeg, https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/c/2/c2a0ea587ed96f546ea8edf851de07d76fdef380_2_1035x274.jpeg 1.5x, https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/c/2/c2a0ea587ed96f546ea8edf851de07d76fdef380_2_1380x366.jpeg 2x" width="690"/>
+   <div class="meta">
+    <svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon">
+     <use xlink:href="#far-image">
+     </use>
+    </svg>
+    <span class="filename">
+     third
+    </span>
+    <span class="informations">
+     1518×403 21.6 KB
+    </span>
+    <svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon">
+     <use xlink:href="#discourse-expand">
+     </use>
+    </svg>
+   </div>
+  </a>
+ </div>
+</p>
+<p>
+ With this “new and improved” version:
+</p>
+<p>
+ <div class="lightbox-wrapper">
+  <a class="lightbox" data-download-href="/uploads/short-url/8Oy718gxNBYy6aaMYEVTzyNls82.jpeg?dl=1" href="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/original/3X/3/d/3dc83a7c76d7acc97e0b06b45f68fe022f9149ca.jpeg" title="fourth">
+   <img alt="fourth" data-base62-sha1="8Oy718gxNBYy6aaMYEVTzyNls82" data-small-upload="https://scdd.sfo2.cdn.digitaloceanspaces.com/uploads/optimized/3X/3/d/3dc83a7c76d7acc97e0b06b45f68fe022f9149ca_2_10x10.png" height="151" src="media/Story-tellers _ Engineers_ a love story_04.jpeg" width="690"/>
+   <div class="meta">
+    <svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon">
+     <use xlink:href="#far-image">
+     </use>
+    </svg>
+    <span class="filename">
+     fourth
+    </span>
+    <span class="informations">
+     1535×338 19.8 KB
+    </span>
+    <svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon">
+     <use xlink:href="#discourse-expand">
+     </use>
+    </svg>
+   </div>
+  </a>
+ </div>
+</p>
+<p>
+ Wow, so different! Or to a designer they are. But the code is almost the same. The first one:
+</p>
+<pre><code class="lang-auto">&lt;div style="padding: 1em; outline: 2px solid #ccc"&gt;
+&lt;p&gt;Are macadamias the best nut?&lt;/p&gt;
+&lt;button style="background-color: green; outline: green; color: white; font-weight: bold; padding: 1em 2em; margin-right: 1em"&gt;Yes!&lt;/button&gt;
+&lt;button style="background-color: white; outline: 2px solid red;color: #ccc; font-weight: normal; padding: 1em 2em"&gt;No&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>
+ And the second one:
+</p>
+<pre><code class="lang-auto">&lt;div style="padding: 1em; outline: 4px dotted #ccc"&gt;
+&lt;p&gt;Are macadamias the best nut?&lt;/p&gt;
+&lt;button style="background-color: green; outline: green; color: orange; font-weight: bold; padding: .1em .2em; margin-right: 1em"&gt;Yes!&lt;/button&gt;
+&lt;button style="background-color: white; outline: 2px solid red;color: cyan; font-weight: normal; padding: .1em .2em"&gt;No&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>
+ They look quite different. Each is beautiful in its own way! But actually they both use inline styles, and only a few parameters are changed. To a designer, the differences are great, but to an engineer there’s hardly any difference at all.
+</p>
+<p>
+ Now, a designer looks at these and they wonder:
+</p>
+<ul>
+ <li>
+  How does this fit in with the rest of the website?
+ </li>
+ <li>
+  Is it clear?
+ </li>
+ <li>
+  Is it accessible?
+ </li>
+ <li>
+  Is the color contrast readable?
+ </li>
+ <li>
+  Is the color association of "green means go" universal?
+ </li>
+</ul>
+<p>
+ And so on. An engineer asks themselves:
+</p>
+<ul>
+ <li>
+  Does it scale?
+ </li>
+ <li>
+  How is the CSS produced?
+ </li>
+ <li>
+  What's the browser compatibility?
+ </li>
+ <li>
+  Should I hard code it or make it dynamic?
+ </li>
+ <li>
+  Should I encapsulate the logic and styles in this component or leverage universals?
+ </li>
+</ul>
+<p>
+ And so on. Engineering is hard! And UX is hard too! That’s why we need experts in both fields. They both ask quite different kinds of questions and solve different kinds of problems. But it all works just fine, as long as they listen to each other.
+</p>
+<p>
+ To come back to Buddhism, I think that in spiritual circles generally, there’s an excess of story-tellers over engineers. Much of what we find in spiritual fields, and Buddhism is no exception, is a set of rather imaginative just-so stories, which often bear little relation to reality. In Buddhism, what happens is that those with more of an engineering mindset get a bit dissatisfied with this; they want something more precise, more critical, more accountable. And they end up here, reading and discussing Suttas!
+</p>
+<p>
+ And in the Suttas, we find plenty that rewards an engineering perspective. There is a strongly rational, logical, and self-consistent pattern that invites, almost demands, a critical intelligence in response. Suttas might have many meanings, but they don’t have
+ <em>
+  any
+ </em>
+ meaning. Technical precision provides constraints that guard against many a misstep on the path.
+</p>
+<p>
+ But it’s not everything. If we omit the methods of the story-tellers, the sense of nuance and ambiguity, the appreciation of narrative flow and context, we end up with a reductive and stale way of seeing. And when we look at the Suttas, the kinds of questions we want to ask are not always going to be the most revealing.
+</p>
+<p>
+ We’ve all got something of the engineer in us, and something of the story-teller. Let’s let both of them enjoy the Suttas. If your character leans towards one side or the other, great, bring that to the table. But be on special alert to listen to the other side, because it’s from them that you’ll really learn.
+</p>
+</body>
+</html>

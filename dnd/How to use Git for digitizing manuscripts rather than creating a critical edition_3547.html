@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>How to use Git for digitizing manuscripts rather than creating a critical edition</title>
+</head>
+<body>
+  <h1>How to use Git for digitizing manuscripts rather than creating a critical edition</h1>
+  <p><em>2016-11-09T02:01:56.220Z</em></p>
+  <p><strong>Original:</strong> <a href="https://discourse.suttacentral.net/t/how-to-use-git-for-digitizing-manuscripts-rather-than-creating-a-critical-edition/3547">https://discourse.suttacentral.net/t/how-to-use-git-for-digitizing-manuscripts-rather-than-creating-a-critical-edition/3547</a></p>
+  <p>
+ Since writing
+ <a href="https://discourse.suttacentral.net/t/on-the-very-idea-of-a-critical-edition-of-the-pali-canon/3511">
+  a few words on the idea of a critical edition of the Pali canon
+ </a>
+ I have thought about this a little more and would like to outline in some more detail a methodology. Obviously this is just one approach, but to avoid complications I will just present here, in steps as simple and concrete as I can, what I feel would be the best approach.
+</p>
+<p>
+ What follows is a technical description of the creation of a set of digitized texts based on available manuscripts. It is just an outline, however I believe that it is a very practical one and could be actually achieved. While there will, of course, be many complications both foreseen and unseen, we should not lose sight of the fact that the task is, at heart, a very simple one. Obviously we have no plans at present to do this, but there is no harm in imagining possibilities.
+</p>
+<h2>
+ Manuscripts
+</h2>
+<p>
+ Here I don’t have much experience or suggestions. The basic requirement for any such project is sets of images from the manuscripts, which are of high quality. The critical thing is that the images must be labelled with a consistent naming convention. This will form the basis of the hierarchy for that edition. The naming system will typically have three components:
+</p>
+<ol>
+ <li>
+  edition
+ </li>
+ <li>
+  volume
+ </li>
+ <li>
+  page
+ </li>
+</ol>
+<p>
+ Let’s invent a hypothetical edition called Foo. Each image in the Foo edition is labeled, for example,
+ <code>
+  foo.3.22.png
+ </code>
+ . That is to say, a png image file of edition Foo, volume three, page twenty two.
+</p>
+<h2>
+ Overlapping hierarchies
+</h2>
+<p>
+ Each text shall use two overlapping hierarchies:
+</p>
+<ol>
+ <li>
+  a universal hierarchy based on shared semantic divisions in the texts
+ </li>
+ <li>
+  a particular hierarchy based on the pagination of that particular edition
+ </li>
+</ol>
+<p>
+ I have described the particular hierarchy above. As for the universal hierarchy, let us use the same as SuttaCentral. The basic features are:
+</p>
+<ol>
+ <li>
+  Texts are maintained in one file per sutta
+ </li>
+ <li>
+  Sutta names are as per SC, eg. mn1, mn2, etc.
+ </li>
+ <li>
+  As sutta IDs are unique, any folder structure may be used.
+ </li>
+</ol>
+<h2>
+ Text input
+</h2>
+<p>
+ The text of each manuscript is to be inputted as accurately and literally as possible. There is no editorial input; no corrections, identifications of variants, and the like. Texts are romanized, but without adding punctuation, capitals, or any other features. This keeps the job of the typist as simple as possible.
+</p>
+<p>
+ Here is how the text is created.
+</p>
+<ol>
+ <li>
+  Create a new text file with the ID of the appropriate sutta, let us say mn1.
+ </li>
+ <li>
+  Type exactly what is on the page.
+ </li>
+ <li>
+  At the end of the page, insert a pre-defined arbitrary glyph, let us say #. This means “new page”. This is inserted inline, with no other indication of a new page. (See below)
+ </li>
+ <li>
+  Text is segmented by adding a new line (i.e. hit
+  <kbd>
+   Enter
+  </kbd>
+  ) for each new segment. (See below)
+ </li>
+</ol>
+<p>
+ That’s all that is required to create a new digitized edition.
+</p>
+<h2>
+ Pagination
+</h2>
+<p>
+ There are no page numbers recorded in the text. There is no need, as it is a simple increment. As in normal document production in LaTeX, Word, etc., the page numbers can be trivially generated at any later stage. All we need is a marker to indicate that there is a new page at this point.
+</p>
+<p>
+ Here is an example of how this could work in practice. We generate an HTML file for the relevant text (a full sutta or segment; the HTML template can be supplied by the reference edition). When this is done, the # markers are replaced with the particular hierarchy information, which is inserted as HTML metadata, say
+ <code>
+  &lt;a id="foo.3.22"&gt;&lt;/a&gt;
+ </code>
+ . This can be displayed with the HTML text.
+</p>
+<p>
+ An alternate, and probably better, approach would be to generate the metadata as standoff JSON, which can be integrated as HTML, etc., for display purposes.
+</p>
+<p>
+ In addition, it serves as the basis for looking up the relevant image file of the manuscript. On a server somewhere, we have our old friend
+ <code>
+  foo.3.22.png
+ </code>
+ . All we need to do is point the ID at the server and we link up the text and manuscript.
+</p>
+<h2>
+ Segmenting
+</h2>
+<p>
+ Segmenting of text refers to breaking it into meaningful semantic segments. This aids looking up the appropriate segment, and also helps computers process the difference between texts.
+</p>
+<p>
+ SC is in the process of segmenting texts, based on punctuation, then hand adjusted. Punctuation is a useful guide for segmenting texts, as it represents an editor’s best judgment as to how a text is broken up into sentences, clauses, and so on. Such segments will almost always be preserved across editions, since variations are usually at a much smaller scale.
+</p>
+<p>
+ Let us take SC’s segmented text as the reference edition. Each segment in the reference edition is on a new line. A typist has that open in a window as they work. Each time they come to a new segment, they simply mirror the reference edition by inserting a new line.
+</p>
+<p>
+ Note that this does not impose any semantic structure on the text, and requires no editorial intervention. It is merely a way of coordinating chunks of texts at a smaller scale than a full sutta. No metadata is added, the segment numbering is merely inferred from the line number (which can be checked by matching against the reference edition.)
+</p>
+<p>
+ Since segmenting as such carries no semantic weight, it does not matter if it cannot be done exactly. In the very rare instances where different editions vary so greatly that segmenting cannot be done neatly, a typist just does what seems reasonable. From a practical point of view, this simply means that this particular spot will be a bit more difficult to process later on. It doesn’t affect the actual text.
+</p>
+<p>
+ Once segmented, we can do a number of things:
+</p>
+<ol>
+ <li>
+  Whenever a text (or similarly segmented translation) is read, the various manuscripts for that segment can be trivially located.
+ </li>
+ <li>
+  We can run a diff engine against each segment; also it makes diffing the entire text computationally easier and more accurate. (If you’re not familiar with what a diff engine does, you can
+  <a href="https://www.diffchecker.com/ahvFO0BC">
+   check this diff I made of two different versions of the Metta sutta on SC
+  </a>
+  )
+ </li>
+ <li>
+  We can easily export the text against the template of the reference edition, supplying a ready-made HTML (or other) framework of paragraphs and so on.
+ </li>
+ <li>
+  Comments and discussions of specific terms and phrases can be easily and universally identified per segment.
+ </li>
+</ol>
+<h2>
+ People
+</h2>
+<p>
+ The critical bottleneck in any project like this is people. There are very few scholars in the world who have sufficient knowledge of Middle-Indic languages to undertake the text-critical work for a critical edition. However, the process I have outlined here can be done by people with a much more humble skill set. Essentially what we need is:
+</p>
+<ol>
+ <li>
+  Good typing skills
+ </li>
+ <li>
+  Basic computer literacy
+ </li>
+ <li>
+  Basic knowledge of Pali (completing an introductory course)
+ </li>
+ <li>
+  Knowledge of the script (most of the scripts of the manuscripts are similar to modern Thai, Burmese, Sinhala, etc. so this is not hugely difficult.)
+ </li>
+</ol>
+<p>
+ While this is still not a trivial task, I think it would be not too difficult to find workers. A team of, say, 5 full-time staff would get a lot done.
+</p>
+<h2>
+ Software development
+</h2>
+<p>
+ None.
+</p>
+<p>
+ Usually designing and building the software application is a huge part of such projects (think CBETA, VRI, etc.) We just use pre-existing open source software. Anyone who wants to can pull the data and build their own applications; that’s what git is for. Having said which, for simply referring to variants, you can do it just fine on Github itself.
+</p>
+<h2>
+ Development requirements
+</h2>
+<ol>
+ <li>
+  A computer
+ </li>
+ <li>
+  Text editor
+ </li>
+ <li>
+  Image viewer
+ </li>
+ <li>
+  Local install of git
+ </li>
+ <li>
+  Internet
+ </li>
+</ol>
+<p>
+ So basically, pretty much anyone with a computer has everything they need. We just need to ensure the typists have
+ <a href="https://en.wikipedia.org/wiki/Git">
+  git
+ </a>
+ , and can use it. For those not familiar with git, what is needed for this job is very simple, there’s just a couple of commands to learn.
+</p>
+<h2>
+ Maintenance
+</h2>
+<p>
+ One of the outstanding features of git is that it preserves all records of changes, time-stamped, authored, and commented, in perpetuity. This makes it ideal for scripture, as any alteration is permanently and publicly available.
+</p>
+<p>
+ Today, almost all open source software projects are hosted on Github and similar sites, which ensures that they will be reliably maintained and available for many years to come. In addition, git is built on the idea of maintaining local copies and multiple redundancies of data, so it will be almost impossible for the texts hosted on github to vanish.
+</p>
+<p>
+ Consider the sad case of the Mahasangiti edition used on SuttaCentral. When its parent organization, the Dhamma Society, collapsed, all its websites vanished overnight, never to return. We were only able to reuse the text thanks to Ven Yuttadhammo, who had made a copy of it.
+</p>
+<h2>
+ A critical edition, redux?
+</h2>
+<p>
+ Note that while this project would, in my view, largely replace the need for a critical edition, it by no means invalidates the concept. On the contrary, by focusing on the critical task of data input, it makes it much easier to create a critical edition, or multiple critical editions, in the future. All the basic data work is done, then the editorial process can be applied. The key to completing any big task is to break it up.
+</p>
+<p>
+ Meanwhile, just as the text can be pulled for use in multiple applications, it can also be used as the basis for discussion, comment, and criticism. Forums, blogs, even git itself, can be used. Since the segment numbers are a universal unique ID, it becomes trivial to reference between different discussions.
+</p>
+<p>
+ The important thing is that the opinions and judgments of the scholars do not affect the text itself. They can ebb and flow, as new manuscripts are found or new interpretations proposed. In this way the scholars can focus on clarifying what is meaningful and important, rather than spending decades sorting out every last detail of spelling.
+</p>
+</body>
+</html>
